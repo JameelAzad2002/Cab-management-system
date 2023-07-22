@@ -50,8 +50,8 @@
       <div class="form">
         <form class="form" action="/book" method="post">
           <%if(user) { %>
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" value='<%= user.name%>''>  <!-- a space ends the value and whatever comes after the space starts a new attribute, hence include it in quotes -->
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" value='<%= user.name%>''>  <!-- a space ends the value and whatever comes after the space starts a new attribute, hence include it in quotes -->
           <label for="email">Email</label>
           <input type="email" name="email" id="email" value=<%= user.email%>>
           <label for="number">Phone Number</label>
@@ -77,11 +77,11 @@
 
         <%if(!user) { %>
           <label for="name">Name</label>
-          <input type="text" id="name" name="name">
+          <input type="text" id="name" name="name" required>
           <label for="email">Email</label>
-          <input type="email" name="email" id="email">
+          <input type="email" name="email" id="email" required>
           <label for="number">Phone Number</label>
-          <input type="text" id="number" name="mob_num">
+          <input type="text" id="number" name="mob_num" required>
           <label for="hall">Hall</label>
           <select name="hall" id="hall" name="hall">
             <option value="MMM">MMM</option>
@@ -177,17 +177,17 @@
 
   <div class="contact" id="contact">
     <h1>Contact Us</h1>
-    <div class="contactForm">
-      <label for="name">Name</label>
-      <input type="text">
-      <label for="email">Email</label>
-      <input type="email">
-      <label for="numner">Phone Number</label>
-      <input type="text">
-      <label for="message">Message</label>
-      <input type="text" id="message">
-      <input type="submit" value="Send">
-    </div>
+    <form class="contactForm" action="/contact-us" method="post">
+        <label for="name">Name</label>
+        <input type="text" name="name" required>
+        <label for="email">Email</label>
+        <input type="email" name="email" required>
+        <label for="numner">Phone Number</label>
+        <input type="text" name="mob_num" required>
+        <label for="message">Message</label>
+        <input type="text" name="message" id="message" required>
+        <input type="submit" value="Send Feedback">
+    </form>
   </div>
 
   <footer>

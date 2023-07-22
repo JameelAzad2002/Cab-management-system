@@ -8,7 +8,8 @@ const User = require('./models/user_data');
 const bcrypt = require('bcrypt');
 const flash = require('express-flash');
 const userRoutes = require('./routes/userRoutes');
-const sendMail =  require('./sendMail');
+const sendConfirmationMail =  require('./controllers/sendConfirmationMail');
+const sendFeedbackMail = require('./controllers/sendFeedbackMail');
 const dotenv = require("dotenv");
 
 //connect to mongodb and start server
@@ -71,7 +72,8 @@ passport.deserializeUser(async function (id, done) {
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(flash());
@@ -98,8 +100,24 @@ app.post('/send-mail', (req,res)=>{
     const dateOfBooking = req.body.date;
     const subject = "Booking confirmed";
     const body = `Assalamualaikum ${recipientName}\n\nThis is to notify you that your cab booking booking has been confirmed for ${dateOfBooking}`
-    sendMail(recipientEmail, subject, body);
+    sendConfirmationMail(recipientEmail, subject, body);
     res.redirect('/');
+});
+
+app.get('/contact-us', (req,res)=>{
+    res.render('contact');
+});
+
+app.post('/contact-us', (req,res) => {
+    const sender = req.body.name;
+    const senderMail = req.body.email;
+    const message = req.body.message;
+    const mob_num = req.body.mob_num;
+    const adminMail = process.env.ADMIN;
+    const subject = "Feedback";
+    const body = `Assalamualaikum\n\n ${message}\n\n From: ${sender}\nEmail: ${senderMail}\nMobile No.: ${mob_num}`
+    sendFeedbackMail(adminMail,sender,subject,body);
+    res.redirect('/contact-us')
 });
 
 //user routes
