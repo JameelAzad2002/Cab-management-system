@@ -82,17 +82,23 @@ app.get('/about', (req, res) => {
 });
 
 app.post('/book', (req, res) => {
-    const recepient = req.body;
-    console.log(recepient);
+    const recipient = req.body;
+    req.session.userEmail = recipient.email;
+    req.session.username = recipient.name;
     res.redirect('/paymentPage')
 });
 
-app.get('/paymentPage', (req,res) => {
+app.get('/paymentPage', (req,res) => {    
     res.render('paymentPage')
 });
 
 app.post('/send-mail', (req,res)=>{
-    sendMail();
+    const recipientEmail = req.session.userEmail; // Access the email from the session
+    const recipientName = req.session.username;
+    const dateOfBooking = req.body.date;
+    const subject = "Booking confirmed";
+    const body = `Assalamualaikum ${recipientName}\n\nThis is to notify you that your cab booking booking has been confirmed for ${dateOfBooking}`
+    sendMail(recipientEmail, subject, body);
     res.redirect('/');
 });
 
