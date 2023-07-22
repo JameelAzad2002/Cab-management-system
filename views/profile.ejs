@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Profile Page</title>
+    <link rel="shortcut icon" href="#">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lugrasimo&family=Roboto+Condensed:wght@300&family=Tektur&family=Varela+Round&display=swap');
+
+        body {
+            font-family: 'Roboto Condensed', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            height:100%;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .profile h2 {
+            margin-bottom: 10px;
+        }
+
+        .profile p {
+            color: #666;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        .btn{
+            color:red;
+            border-radius: 20px;
+            padding:5px 5px;
+            cursor: pointer;
+            width:70px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Profile</h1>
+        <div class="profile">
+            <img src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png"
+                alt="">
+            <h2><%= name %></h2>
+            <p>Email: <%= email %></p>
+            <p>Phone Number: <%= mob_num %></p>
+            <p>Hall : <%= hall %></p>
+        </div>
+        <div class="bookingInfo">
+            <h1>Your Bookings</h1>
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>Date 1</td>
+                    <td><button class="btn">Cancel</button></td>
+                </tr>
+                <tr>
+                    <td>Date 2</td>
+                    <td><button class="btn">Cancel</button></td>
+                </tr>
+            </table>
+
+        </div>
+</body>
+
+</html>

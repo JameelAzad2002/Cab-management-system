@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="shortcut icon" href="#">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lugrasimo&family=Roboto+Condensed:wght@300&family=Tektur&family=Varela+Round&display=swap');
+    .bookTime h1{
+        text-align: center;
+        font-family: 'Tektur', cursive;
+    }
+ table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: 'Roboto Condensed', sans-serif;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  .payment {
+      font-family: 'Lugrasimo', cursive;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      /* align-items: center; */
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      margin: 50px 0px;
+      max-width: 400px;
+      width: 100%;
+      height:40vh;
+      max-height: 400px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    label {
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      transition: border-color 0.3s;
+    }
+
+    input[type="submit"]{
+        background-color: #4CAF50;
+        border-radius: 20px;
+        cursor: pointer;
+        border:2px solid black;
+        margin: 20px 0px;
+    }
+
+    input[type='submit']:hover{
+        background-color: white;
+        transition: 0.5s;
+    }
+
+  </style>
+</head>
+<body>
+    <div class="bookTime">
+        <h1>BOOKING AVAIBILITY</h1>
+        <table>
+          <tr>
+            <th>For Date</th>
+            <th>Booking Avaibility</th>
+            <th>Till Date</th>
+          </tr>
+          <tr>
+            <td>Date 1</td>
+            <td style="color:green">Available</td>
+            <td>Date 3</td>
+          </tr>
+          <tr>
+            <td>Date 2</td>
+            <td style="color:green">Available</td>
+            <td>Data 6</td>
+          </tr>
+          <tr>
+            <td>Date 3</td>
+            <td style="color:red">Not Available</td>
+            <td>Data 6</td>
+          </tr>
+          <!-- Add more rows as needed -->
+        </table>
+    </div>
+    <div class="payment">
+        <div class="container">
+            <h1>Payment Details</h1>
+            <form action="/send-mail" method="post">
+              <label for="upiId">UPI ID</label>
+              <input type="text" id="upiId" placeholder="Enter UPI ID" required>
+              <label for="date">Date</label>
+              <select name="date" id="date">
+                <option value="1">Date1</option>
+                <option value="2">Date2</option>
+              </select>
+              <input type="submit" value="Pay Now">
+            </form>
+          </div>
+    </div>
+</body>
+</html>
+

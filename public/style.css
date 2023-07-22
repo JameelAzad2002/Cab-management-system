@@ -1,0 +1,304 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lugrasimo&family=Roboto+Condensed:wght@300&family=Tektur&family=Varela+Round&display=swap');
+
+/* font-family: 'Dancing Script', cursive;
+font-family: 'Lugrasimo', cursive;
+font-family: 'Roboto Condensed', sans-serif;
+font-family: 'Tektur', cursive;
+font-family: 'Varela Round', sans-serif; */
+
+
+
+body{
+    background-color: white;
+}
+
+*{
+    margin:0 0;
+}
+
+
+nav ul{
+    display:flex;
+    height:40px;
+    background-color: white;
+    font-family: 'Tektur', cursive;
+}
+
+nav ul>li {
+    list-style: none;
+    margin: 30px;
+    font-size: 1.3rem;
+}
+
+nav ul li a{
+    text-decoration: none;
+    cursor:pointer;
+}
+
+nav ul li a:hover{
+    color:green;
+}
+
+
+nav ul img{
+    width:50px;
+    height:50px;
+    margin:20px;
+    border-radius: 100px;
+}
+
+.profile{
+    position:absolute;
+    right:0vw;
+    display:flex;
+    list-style: none;
+    margin:20px;
+    border:2px solid red;
+    font-size: 1.3rem;
+    cursor:pointer;
+}
+
+.profile li{
+    margin: 0px 6px;
+    padding: 5px 3px;
+}
+
+.home{
+    display:flex;
+    height: 95vh;
+    background-image: url('http://wallpapercave.com/wp/mRYCGmo.jpg');
+    background-size: cover;
+    background-position: center;
+    justify-content: center;
+    align-items: end;
+}
+
+.home .content{
+    background-color: white;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height:40vh;
+    width:50vw;
+}
+
+.content h3{
+    font-size: 1.3rem;
+    font-family: 'Tektur', cursive;
+}
+.content h1{
+    font-size:3rem;
+    font-family: 'Lugrasimo', cursive;
+    margin:30px;
+}
+
+.btn{
+    background-color: black;
+    color:white;
+    font-size: 0.8rem;
+    padding:5px 10px;
+    height:50px;
+    width:150px;
+    border-radius: 50px;
+    font-family: 'Tektur', cursive;
+    cursor:pointer;
+    box-shadow: 10px 10px 10px 0px rgba(1,1,1,0.5);
+}
+
+.btn:hover{
+    box-shadow: 10px 10px 2px 0px rgba(1,1,1,0.5);
+    /* transition:0.5s; */
+}
+
+.btn a{
+    text-decoration: none;
+    color:white;
+}
+
+.section2{
+    display:flex;
+    margin:40px auto;
+    background-color: #ddf2e6;
+    width:90vw;
+    height:100vh;
+}
+
+.booking{
+    margin:50px 100px;
+    color:black;
+    width:30vw;
+    height:60vh;
+}
+.booking h1{
+    text-align: center;
+    font-size: 3rem;
+    font-family: 'Lugrasimo', cursive;
+    margin:20px 20px;
+}
+.booking .form{
+    display:flex;
+    flex-direction: column;
+    width:30vw;
+    font-family: 'Tektur', cursive;
+    font-size:1.5rem;
+
+}
+
+.form label{
+    margin:10px 0px;
+}
+.form input , select{
+    width:20vw;
+    height:3vh;
+    min-width:200px;
+}
+
+.form input[type='submit']
+{
+    margin:40px 0px;
+    height:5vh;
+    font-family: 'Tektur', cursive;
+    border-radius: 30px;
+    background-color: black;
+    color:white;
+    cursor: pointer;
+}
+
+.section2 img{
+    width:40vw;
+    position:absolute;
+    right:4vw;
+    min-height: 100%;
+    max-height: 100%;
+}
+
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: 'Lugrasimo', cursive;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+
+  th {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  .timing h1{
+    font-family: 'Tektur', cursive;
+    text-align: center;
+    font-size: 3rem;
+  }
+
+  .divider{
+    height:10px;
+    background-color:green;
+  }
+
+  .contact{
+    display:flex;
+    flex-direction: column;
+    margin:100px 10px;
+    justify-content: center;
+    align-items: center;
+    color:green;
+  }
+
+  .contact h1{
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size:3rem;
+  }
+  .contactForm{
+    display:flex;
+    flex-direction: column;
+    width:50vw;
+  }
+
+  .contactForm label, .contactForm input{
+    margin:10px 0px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.5rem;
+  }
+
+  #message{
+    height:30vh;
+  }
+
+  .contact input[type='submit']{
+    background-color: black;
+    color:white;
+    width:10vw;
+    min-width: 80px;
+    padding:5px 5px;
+    cursor: pointer;
+  }
+
+  .contact input[type='submit']:hover{
+    color:black;
+    background-color: white;
+    transition: 1s;
+  }
+
+  footer{
+    display:flex;
+    justify-content: space-between;
+  }
+
+  footer h3{
+    font-family: 'Tektur', cursive;
+    color:green;
+  }
+
+  footer .handle{
+    cursor: pointer;
+  }
+  
+
+@media screen and (max-width:900px){
+    .mainnav{
+        display:none;
+    }
+
+}
+@media screen and (max-width:1500px)
+{
+    .content h1{
+        display:none;
+    }
+    .content h3{
+        font-size: 2rem;
+    }
+}
+
+@media screen and (max-width:900px){
+    .section2 img{
+        display:none;
+    }
+    .section2 .booking{
+        margin:0;
+    }
+    .section2 {
+        justify-content: center;
+    }
+    .booking h1{
+        font-size: 1.5rem;
+    }
+    .booking{
+        width:90vw;
+    }
+}

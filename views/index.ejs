@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Friday Cab Service</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="#">
+  <script src="https://kit.fontawesome.com/09e251de9b.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <img src="https://tse2.mm.bing.net/th?id=OIP.x4rbBKH0yW3AHECoopBUdQHaHa&pid=Api&P=0&h=180" alt="logo">
+      <li class="mainnav"><a href="#home">Home</a></li>
+      <li class="mainnav"><a href="about">About</a></li>
+      <li class="mainnav"><a href="#timing">Timings</a></li>
+      <li class="mainnav"><a href="#contact">Contact Us</a></li>
+      <div class="profile">
+        <% if (user) {%>
+          <li><i class="fa-solid fa-user"></i></li>
+          <li><a href="/<%= user._id%>">
+              <%= user.name%>
+            </a></li>
+          <li><a href="/log-out">Log Out</a></li>
+          <% } else { %>
+            <li><i class="fa-solid fa-user"></i></li>
+            <li><a href="/log-in">Login In</a></li>
+            <%}%>
+      </div>
+    </ul>
+    <ul>
+    </ul>
+  </nav>
+
+  <div class="home" id="home">
+    <div class="content">
+      <h3>Friday Cab Service, IIT Kharagpur</h3>
+      <h1>Your Salah, Our Priority: Ride in Comfort and Style!</h1>
+      <button class="btn"><a href="#booking">BOOK NOW</a></button>
+    </div>
+  </div>
+
+
+  <div class="section2">
+    <div class="booking" id="booking">
+      <h1>Book Your Cab Now</h1>
+      <div class="form">
+        <form class="form" action="/book" method="post">
+          <%if(user) { %>
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" value='<%= user.name%>''>  <!-- a space ends the value and whatever comes after the space starts a new attribute, hence include it in quotes -->
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" value=<%= user.email%>>
+          <label for="number">Phone Number</label>
+          <input type="text" id="number" name="mob_num" value=<%= user.mob_num%>>
+          <label for="hall">Hall</label>
+          <select name="hall" id="hall" name="hall">
+            <option value=<%= user.hall%>><%= user.hall%></option>
+            <option value="MMM">MMM</option>
+            <option value="LBS">LBS</option>
+            <option value="LLR">LLR</option>
+            <option value="HJB">HJB</option>
+            <option value="JCB">JCB</option>
+            <option value="GKH">GKH</option>
+            <option value="VS">VS</option>
+            <option value="MS">MS</option>
+            <option value="RK">RK</option>
+            <option value="RP">RP</option>
+            <option value="Patel">Patel</option>
+            <option value="Azad">Azad</option>
+            <option value="Nehru">Nehru</option>
+          </select>
+        <% } %>
+
+        <%if(!user) { %>
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email">
+          <label for="number">Phone Number</label>
+          <input type="text" id="number" name="mob_num">
+          <label for="hall">Hall</label>
+          <select name="hall" id="hall" name="hall">
+            <option value="MMM">MMM</option>
+            <option value="LBS">LBS</option>
+            <option value="LLR">LLR</option>
+            <option value="HJB">HJB</option>
+            <option value="JCB">JCB</option>
+            <option value="GKH">GKH</option>
+            <option value="VS">VS</option>
+            <option value="MS">MS</option>
+            <option value="RK">RK</option>
+            <option value="RP">RP</option>
+            <option value="Patel">Patel</option>
+            <option value="Azad">Azad</option>
+            <option value="Nehru">Nehru</option>
+          </select>
+        <% } %>
+          <input type="submit" value="Make Payment" class="btn">
+        </form>
+      </div>
+    </div>
+    <img src="Cab.jpg" alt="Taxi Image">
+  </div>
+
+  <div class="divider"></div>
+  <div class="timing" id="timing">
+    <h1>Timings</h1>
+    <table>
+      <tr>
+        <th>Hall</th>
+        <th>Time of Leaving</th>
+        <th>Place of Leaving</th>
+      </tr>
+      <tr>
+        <td>MMM</td>
+        <td>Data 2</td>
+        <td>Data 3</td>
+      </tr>
+      <tr>
+        <td>LBS</td>
+        <td>Data 5</td>
+        <td>Data 6</td>
+      </tr>
+      <tr>
+        <td>LLR</td>
+        <td>Data 5</td>
+        <td>Data 6</td>
+      </tr>
+      <tr>
+        <td>HJB</td>
+        <td>Data 5</td>
+        <td>Data 6</td>
+      </tr>
+      <tr>
+        <td>JCB</td>
+        <td>Data 5</td>
+        <td>Data 6</td>
+      </tr>
+      <tr>
+        <td>RK</td>
+        <td>Data 5</td>
+        <td>Data 6</td>
+      </tr>
+      <tr>
+        <td>RP</td>
+        <td>Data 5</td>
+        <td>Data 6</td>
+      </tr>
+      <tr>
+        <td>Patel</td>
+        <td>Data 5</td>
+        <td>Data 6</td>
+      </tr>
+      <tr>
+        <td>Azad</td>
+        <td>Data 5</td>
+        <td>Data 6</td>
+      </tr>
+      <tr>
+        <td>Nehru</td>
+        <td>Data 5</td>
+        <td>Data 6</td>
+      </tr>
+      <tr>
+        <td>GKH</td>
+        <td>Data 5</td>
+        <td>Data 6</td>
+      </tr>
+      <!-- Add more rows as needed -->
+    </table>
+  </div>
+  <div class="divider"></div>
+
+  <div class="contact" id="contact">
+    <h1>Contact Us</h1>
+    <div class="contactForm">
+      <label for="name">Name</label>
+      <input type="text">
+      <label for="email">Email</label>
+      <input type="email">
+      <label for="numner">Phone Number</label>
+      <input type="text">
+      <label for="message">Message</label>
+      <input type="text" id="message">
+      <input type="submit" value="Send">
+    </div>
+  </div>
+
+  <footer>
+    <h3>Created with <i class="fa-sharp fa-solid fa-heart fa-beat"></i> by Atif Faizan, Md. Arham Ali and Jameel Ahmad
+      Azad.</h3>
+    <div class="handle">
+      <i class="fa-brands fa-3x fa-facebook"></i>
+      <i class="fa-brands fa-3x fa-square-instagram"></i>
+      <i class="fa-brands fa-3x fa-twitter"></i>
+    </div>
+  </footer>
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/smooth-scroll/16.1.3/smooth-scroll.min.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
