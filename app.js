@@ -97,7 +97,7 @@ app.post('/send-mail', (req,res)=>{
     const recipientName = req.session.username;
     const dateOfBooking = req.body.date;
     const subject = "Booking confirmed";
-    const body = `Assalamualaikum ${recipientName}\n\nThis is to notify you that your cab booking booking has been confirmed for ${date}`
+    const body = `Assalamualaikum ${recipientName}\n\nThis is to notify you that your cab booking booking has been confirmed for ${dateOfBooking}`
     sendMail(recipientEmail, subject, body);
     res.redirect('/');
 });
