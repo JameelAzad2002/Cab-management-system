@@ -1,9 +1,11 @@
 const passport = require('passport');
 const User = require('../models/user_data');
+const Cab = require('../models/cabTimings');
 const bcrypt = require('bcrypt')
 
-const user_index = (req,res) => {
-    res.render('index', { user: req.user });
+const user_index = async (req,res) => {
+    const cabs = await Cab.find()
+    res.render('index', { user: req.user, cabs:cabs });
 }
 
 const user_login = (req,res) => {
@@ -12,7 +14,7 @@ const user_login = (req,res) => {
 
 const user_authenticate = passport.authenticate("local", {
     successRedirect: "/",
-    failureRedirect: "/log-in",
+    failureRedirect: "/user/log-in",
     failureFlash: true
 })
 
@@ -31,9 +33,9 @@ const user_create = async (req, res, next) => {
             password: hashedPassword
         });
         const result = await user.save();
-        res.redirect("/log-in");
+        res.redirect("/user/log-in");
     } catch (err) {
-        res.redirect('/sign-up')
+        res.redirect('/user/sign-up')
         return next(err);
     };
 }

@@ -98,7 +98,7 @@
 <body>
   <div class="container">
     <h1>Sing In</h1>
-    <form name="signupForm" onsubmit="return validateForm()" action="/sign-up" method="post">
+    <form name="signupForm" onsubmit="return validateForm()" action="/user/sign-up" method="post">
       <input type="text" name="name" placeholder="Name" required>
       <input type="email" name="email" placeholder="Email" required>
       <input type="text" name="mob_num" placeholder="Phone Number">
@@ -123,7 +123,7 @@
       <button type="submit">Sign Up</button>
     </form>
     <p class="error" id="error"></p>
-    <p id="createAcc"><a href="/log-in">Already have an Account? Log In.</a></p>
+    <p id="createAcc"><a href="/user/log-in">Already have an Account? Log In.</a></p>
   </div>
 </body>
 

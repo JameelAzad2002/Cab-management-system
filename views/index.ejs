@@ -21,13 +21,13 @@
       <div class="profile">
         <% if (user) {%>
           <li><i class="fa-solid fa-user"></i></li>
-          <li><a href="/<%= user._id%>">
+          <li><a href="/user/<%= user._id%>">
               <%= user.name%>
             </a></li>
-          <li><a href="/log-out">Log Out</a></li>
+          <li><a href="/user/log-out">Log Out</a></li>
           <% } else { %>
             <li><i class="fa-solid fa-user"></i></li>
-            <li><a href="/log-in">Login In</a></li>
+            <li><a href="/user/log-in">Login In</a></li>
             <%}%>
       </div>
     </ul>
@@ -115,62 +115,13 @@
         <th>Time of Leaving</th>
         <th>Place of Leaving</th>
       </tr>
-      <tr>
-        <td>MMM</td>
-        <td>Data 2</td>
-        <td>Data 3</td>
-      </tr>
-      <tr>
-        <td>LBS</td>
-        <td>Data 5</td>
-        <td>Data 6</td>
-      </tr>
-      <tr>
-        <td>LLR</td>
-        <td>Data 5</td>
-        <td>Data 6</td>
-      </tr>
-      <tr>
-        <td>HJB</td>
-        <td>Data 5</td>
-        <td>Data 6</td>
-      </tr>
-      <tr>
-        <td>JCB</td>
-        <td>Data 5</td>
-        <td>Data 6</td>
-      </tr>
-      <tr>
-        <td>RK</td>
-        <td>Data 5</td>
-        <td>Data 6</td>
-      </tr>
-      <tr>
-        <td>RP</td>
-        <td>Data 5</td>
-        <td>Data 6</td>
-      </tr>
-      <tr>
-        <td>Patel</td>
-        <td>Data 5</td>
-        <td>Data 6</td>
-      </tr>
-      <tr>
-        <td>Azad</td>
-        <td>Data 5</td>
-        <td>Data 6</td>
-      </tr>
-      <tr>
-        <td>Nehru</td>
-        <td>Data 5</td>
-        <td>Data 6</td>
-      </tr>
-      <tr>
-        <td>GKH</td>
-        <td>Data 5</td>
-        <td>Data 6</td>
-      </tr>
-      <!-- Add more rows as needed -->
+      <%cabs.forEach(cab=>{ %>
+        <tr>
+          <td><%= cab.hall%></td>
+          <td><%= cab.time%></td>
+          <td><%= cab.place%></td>
+        </tr>
+      <%})%>
     </table>
   </div>
   <div class="divider"></div>

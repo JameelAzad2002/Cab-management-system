@@ -11,6 +11,7 @@ const userRoutes = require('./routes/userRoutes');
 const sendConfirmationMail =  require('./controllers/sendConfirmationMail');
 const sendFeedbackMail = require('./controllers/sendFeedbackMail');
 const dotenv = require("dotenv");
+const Cab = require('./models/cabTimings')
 
 //connect to mongodb and start server
 dotenv.config(); 
@@ -78,6 +79,8 @@ app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(flash());
 
+
+
 //routes
 app.get('/about', (req, res) => {
     res.render('about');
@@ -120,8 +123,27 @@ app.post('/contact-us', (req,res) => {
     res.redirect('/contact-us')
 });
 
+app.get('/add-cab-data', (req,res) =>{
+    res.render('addCabData');
+})
+
+app.post('/add-cab-data', async (req,res)=>{
+    const cab = new Cab({
+        hall: req.body.hall,
+        time: req.body.time,
+        place: req.body.place
+    });
+    await cab.save();
+    res.redirect('/add-cab-data');
+});
+
+//redirect
+app.get('/', (req,res)=>{
+    res.redirect('/user');
+})
+
 //user routes
-app.use('/',userRoutes);
+app.use('/user',userRoutes);
 
 //404 pages
 app.use((req, res) => {
