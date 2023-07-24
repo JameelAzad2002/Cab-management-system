@@ -1,38 +1,48 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <link rel="shortcut icon" href="#">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lugrasimo&family=Roboto+Condensed:wght@300&family=Tektur&family=Varela+Round&display=swap');
-    .bookTime h1{
-        text-align: center;
-        font-family: 'Tektur', cursive;
+
+    .bookTime h1 {
+      text-align: center;
+      font-family: 'Tektur', cursive;
     }
- table {
-    border-collapse: collapse;
-    width: 100%;
-    font-family: 'Roboto Condensed', sans-serif;
-  }
 
-  th, td {
-    text-align: left;
-    padding: 8px;
-  }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-family: 'Roboto Condensed', sans-serif;
+    }
 
-  th {
-    background-color: #4CAF50;
-    color: white;
-  }
+    th,
+    td {
+      text-align: left;
+      padding: 8px;
+    }
 
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
 
-  tr:hover {
-    background-color: #ddd;
-  }
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
 
-  .payment {
+    tr:hover {
+      background-color: #ddd;
+    }
+
+    .btn {
+      border: 1px solid red;
+      padding: 3px 12px;
+      border-radius: 60px;
+    }
+
+    .payment {
       font-family: 'Lugrasimo', cursive;
       background-color: #f5f5f5;
       margin: 0;
@@ -51,7 +61,7 @@
       margin: 50px 0px;
       max-width: 400px;
       width: 100%;
-      height:40vh;
+      height: 40vh;
       max-height: 400px;
     }
 
@@ -76,63 +86,151 @@
       transition: border-color 0.3s;
     }
 
-    input[type="submit"]{
-        background-color: #4CAF50;
-        border-radius: 20px;
-        cursor: pointer;
-        border:2px solid black;
-        margin: 20px 0px;
+    input[type="submit"] {
+      background-color: #4CAF50;
+      border-radius: 20px;
+      cursor: pointer;
+      border: 2px solid black;
+      margin: 20px 0px;
     }
 
-    input[type='submit']:hover{
-        background-color: white;
-        transition: 0.5s;
+    input[type='submit']:hover {
+      background-color: white;
+      transition: 0.5s;
     }
-
   </style>
 </head>
-<body>
-    <div class="bookTime">
-        <h1>BOOKING AVAIBILITY</h1>
-        <table>
-          <tr>
-            <th>For Date</th>
-            <th>Booking Avaibility</th>
-            <th>Till Date</th>
-          </tr>
-          <tr>
-            <td>Date 1</td>
-            <td style="color:green">Available</td>
-            <td>Date 3</td>
-          </tr>
-          <tr>
-            <td>Date 2</td>
-            <td style="color:green">Available</td>
-            <td>Data 6</td>
-          </tr>
-          <tr>
-            <td>Date 3</td>
-            <td style="color:red">Not Available</td>
-            <td>Data 6</td>
-          </tr>
-          <!-- Add more rows as needed -->
-        </table>
-    </div>
-    <div class="payment">
-        <div class="container">
-            <h1>Payment Details</h1>
-            <form action="/send-mail" method="post">
-              <label for="upiId">UPI ID</label>
-              <input type="text" id="upiId" placeholder="Enter UPI ID" required>
-              <label for="date">Date</label>
-              <select name="date" id="date">
-                <option value="07/08/2023">07/08/2023</option>
-                <option value="14/08/2023">14/08/2023</option>
-              </select>
-              <input type="submit" value="Pay Now">
-            </form>
-          </div>
-    </div>
-</body>
-</html>
 
+<body>
+  <div class="bookTime">
+    <h1>BOOKING AVAIBILITY</h1>
+    <table id="availabilityTable">
+      <tr>
+        <th>For Date</th>
+        <th>Booking Avaibility</th>
+        <th>Till Date</th>
+        <th></th>
+      </tr>
+    </table>
+  </div>
+  <div class="payment">
+    <div class="container">
+      <h1>Payment Details</h1>
+      <form action="/send-mail" method="post">
+        <label for="upiId">UPI ID</label>
+        <input type="text" id="upiId" placeholder="Enter UPI ID" required>
+        <label for="date">Date</label>
+        <select name="date" id="date">
+        </select>
+        <input type="submit" value="Pay Now">
+      </form>
+    </div>
+  </div>
+
+
+  <script>
+    // Get the reference to the table and the date selection dropdown
+    const availabilityTable = document.getElementById("availabilityTable");
+    const dateSelect = document.getElementById("date");
+
+    // Function to check if the date is a Friday
+    function isFriday(date) {
+      return date.getDay() === 0; // Friday has a day index of 5
+    }
+
+    //Function to check if its past 11
+    function hasPassed11AM(date) {
+      const now = new Date();
+      return date.toDateString() === now.toDateString() && date.getHours() >= 11;
+    }
+
+    // Function to generate Fridays for the next 6 months and add them to the table and date selection
+    function addFridaysToTableAndSelect() {
+      const today = new Date();
+      let date = new Date(today);
+
+      for (let i = 0; i < 30; i++) {
+
+        // Check if it's Friday
+        if (isFriday(date)) {
+          const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+
+          // Add to the table
+          const newRow = availabilityTable.insertRow();
+          newRow.innerHTML = `<td>${formattedDate}</td><td style="color:green">Available</td><td>${formattedDate} 11:00 AM</td><td></td>`;
+
+          // Add to the date selection
+          if (hasPassed11AM(date)) {
+            newRow.querySelector("td:nth-child(2)").innerText = "Not Available";
+            newRow.querySelector("td:nth-child(2)").style.color = "red";
+
+            //add emergency conatact
+            const emergencyContact = document.createElement('btn');
+            emergencyContact.innerText = "Contact";
+            emergencyContact.style.color = 'red';
+            emergencyContact.classList.toggle('btn');
+            const emergencyContactLink = document.createElement('a');
+            emergencyContactLink.href = "/emergency-contact";
+            emergencyContactLink.style.textDecoration = 'none';
+            emergencyContactLink.appendChild(emergencyContact);
+            newRow.querySelector('td:nth-child(4)').appendChild(emergencyContactLink);
+          } else {
+            const option = document.createElement("option");
+            option.value = formattedDate;
+            option.text = formattedDate;
+            dateSelect.add(option);
+          }
+        }
+        date.setDate(date.getDate() + 1); // Move to the next day
+      }
+    }
+
+    // Call the function to add Fridays to the table and date selection when the page loads
+    addFridaysToTableAndSelect();
+
+    //check for booked dates
+    const bookedDatesURL = '/user/bookings';
+
+    async function fetchBookedDates() {
+      try {
+        const response = await fetch(bookedDatesURL);
+        if (response.ok) {
+          const data = await response.json();
+          return data.bookedDates;
+        } else {
+          throw new Error("Failed to fetch booked dates")
+        }
+      } catch (err) {
+        console.error(err);
+        return [];
+      }
+    }
+
+    async function disableBookedDates() {
+      const bookedDates = await fetchBookedDates();
+      bookedDates.forEach((bookedDate) => {
+        const option = dateSelect.querySelector(`option[value="${bookedDate}"]`);
+        if (option) {
+          option.remove();
+        }
+
+        const tableRows = availabilityTable.querySelectorAll("tr");
+        for (const row of tableRows) {
+          console.log(row.firstElementChild);
+          const dateCell = row.firstElementChild;
+          if (dateCell.innerText === bookedDate) {
+            const statusCell = row.querySelector("td:nth-child(2)");
+            statusCell.innerText = "Already Booked";
+            statusCell.style.color = "green";
+            statusCell.style.fontWeight = "bold";
+          }
+        }
+
+      });
+    }
+
+    disableBookedDates();
+  </script>
+</body>
+
+</html>

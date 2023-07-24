@@ -124,6 +124,11 @@
       <%})%>
     </table>
   </div>
+  <% if(user) { %>
+  <% if(user.isAdmin) { %>
+    <a href="/add-cab-data">add cab data</a>
+  <% } %>
+  <% } %>
   <div class="divider"></div>
 
   <div class="contact" id="contact">

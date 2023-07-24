@@ -1,6 +1,7 @@
 const passport = require('passport');
 const User = require('../models/user_data');
 const Cab = require('../models/cabTimings');
+const Booking = require('../models/booking');
 const bcrypt = require('bcrypt')
 
 const user_index = async (req,res) => {
@@ -30,6 +31,7 @@ const user_create = async (req, res, next) => {
             email: req.body.email,
             mob_num: req.body.mob_num,
             hall: req.body.hall,
+            isAdmin: false,
             password: hashedPassword
         });
         const result = await user.save();
@@ -52,8 +54,9 @@ const user_logout = (req, res, next) => {
 const user_profile = async (req,res) => {
     const id = req.params.id;
     const user = await User.findById(id);
+    const bookings = await Booking.find({email: user.email});
     if(user){
-        res.render('profile',{name: user.name, email: user.email, mob_num: user.mob_num, hall: user.hall});
+        res.render('profile',{name: user.name, email: user.email, mob_num: user.mob_num, hall: user.hall, bookings: bookings});
     }
     else{
         res.status(404).render('404');

@@ -11,7 +11,8 @@ const userRoutes = require('./routes/userRoutes');
 const sendConfirmationMail =  require('./controllers/sendConfirmationMail');
 const sendFeedbackMail = require('./controllers/sendFeedbackMail');
 const dotenv = require("dotenv");
-const Cab = require('./models/cabTimings')
+const Cab = require('./models/cabTimings');
+const Booking = require('./models/booking');
 
 //connect to mongodb and start server
 dotenv.config(); 
@@ -90,6 +91,8 @@ app.post('/book', (req, res) => {
     const recipient = req.body;
     req.session.userEmail = recipient.email;
     req.session.username = recipient.name;
+    req.session.mob_num = recipient.mob_num;
+    req.session.hall = recipient.hall;    
     res.redirect('/paymentPage')
 });
 
@@ -97,13 +100,23 @@ app.get('/paymentPage', (req,res) => {
     res.render('paymentPage')
 });
 
-app.post('/send-mail', (req,res)=>{
+app.post('/send-mail', async(req,res)=>{
     const recipientEmail = req.session.userEmail; // Access the email from the session
     const recipientName = req.session.username;
+    const recipientMobileNumber = req.session.mob_num;
+    const recipientHall = req.session.hall;
     const dateOfBooking = req.body.date;
     const subject = "Booking confirmed";
     const body = `Assalamualaikum ${recipientName}\n\nThis is to notify you that your cab booking booking has been confirmed for ${dateOfBooking}`
     sendConfirmationMail(recipientEmail, subject, body);
+    const booking = new Booking({
+        name:recipientName,
+        email: recipientEmail,
+        mob_num:recipientMobileNumber,
+        hall:recipientHall,
+        date: dateOfBooking
+    });
+    await booking.save();
     res.redirect('/');
 });
 
@@ -124,7 +137,15 @@ app.post('/contact-us', (req,res) => {
 });
 
 app.get('/add-cab-data', (req,res) =>{
-    res.render('addCabData');
+    if(req.user){
+        if(req.user.isAdmin){
+            res.render('addCabData');
+        } else {
+            res.redirect('/access-denied');
+        }
+    } else {
+    res.redirect('/user/log-in');
+    }
 })
 
 app.post('/add-cab-data', async (req,res)=>{
@@ -135,6 +156,26 @@ app.post('/add-cab-data', async (req,res)=>{
     });
     await cab.save();
     res.redirect('/add-cab-data');
+});
+
+app.get('/access-denied', (req,res) =>{
+    res.render('access-denied');
+});
+
+app.get('/emergency-contact',(req,res)=>{
+    res.render('emergency-contact');
+})
+
+app.get('/user/bookings', async(req,res) =>{
+    try{
+        const userEmail = req.session.userEmail;
+
+        const userBookings = await Booking.find({email:userEmail}, 'date');
+        const bookedDates = userBookings.map((booking) => booking.date);
+        res.json({bookedDates});
+    } catch(err) {
+        res.status(500).json({error: "Failed to fetch booked dates"});
+    }
 });
 
 //redirect

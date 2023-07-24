@@ -109,14 +109,12 @@
                     <th>Date</th>
                     <th></th>
                 </tr>
-                <tr>
-                    <td>Date 1</td>
-                    <td><button class="btn">Cancel</button></td>
-                </tr>
-                <tr>
-                    <td>Date 2</td>
-                    <td><button class="btn">Cancel</button></td>
-                </tr>
+                <% bookings.forEach((booking) =>{ %>
+                    <tr>
+                        <td><%= booking.date%></td>
+                        <td><button class="btn">Cancel</button></td>
+                    </tr>
+                <% }) %>
             </table>
 
         </div>
