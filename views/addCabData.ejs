@@ -9,26 +9,12 @@
 <body>
     <form action="/add-cab-data" method="post">
         <label for="hall">Hall</label>
-        <select name="hall" id="hall" name="hall">
-            <option value="MMM">MMM</option>
-            <option value="LBS">LBS</option>
-            <option value="LLR">LLR</option>
-            <option value="HJB">HJB</option>
-            <option value="JCB">JCB</option>
-            <option value="GKH">GKH</option>
-            <option value="VS">VS</option>
-            <option value="MS">MS</option>
-            <option value="RK">RK</option>
-            <option value="RP">RP</option>
-            <option value="Patel">Patel</option>
-            <option value="Azad">Azad</option>
-            <option value="Nehru">Nehru</option>
-        </select>
+        <input type="text" name="hall">
         <label for="time">Time of Leaving</label>
         <input type="text" name="time">
         <label for="place">Place of Leaving</label>
         <input type="text" name="place">
-        <input type="submit">
+        <input type="submit" value="Add Data">
     </form>
     <a href="/">Return back to homepage</a>
 </body>

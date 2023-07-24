@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#">
+    <title>Document</title>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th>Hall</th>
+            <th>Time of Leaving</th>
+            <th>Place of Leaving</th>
+        </tr>
+        <%cabs.forEach(cab=>{ %>
+            <tr>
+                <td style="display:none;">
+                    <%= cab._id%>
+                </td>
+                <td>
+                    <%= cab.hall%>
+                </td>
+                <td>
+                    <%= cab.time%>
+                </td>
+                <td>
+                    <%= cab.place%>
+                </td>
+                <td>
+                    <button class="edit">Edit</button>
+                </td>
+            </tr>
+            <%})%>
+    </table>
+    <a href="/" id="return">Return back to homepage</a>
+    <script>
+        const edit = document.getElementsByClassName('edit');
+        for (let i = 0; i < edit.length; i++) {
+            edit.item(i).onclick = function () {
+                const row = document.getElementsByTagName('tr')[i+1];
+
+                const form = document.createElement('form');
+                const hall = document.createElement('input');
+                hall.setAttribute('name','hall');
+                hall.setAttribute('value',row.querySelector("td:nth-child(2)").innerText);
+                const time = document.createElement('input');
+                time.setAttribute('name','time');
+                time.setAttribute('value',row.querySelector("td:nth-child(3)").innerText);
+                const place = document.createElement('input');
+                place.setAttribute('name','place');
+                place.setAttribute('value',row.querySelector("td:nth-child(4)").innerText);
+                
+                const updateData = document.createElement('input');
+                updateData.setAttribute('type', 'submit');
+                const id = row.querySelector("td:nth-child(1)").innerText.trim();
+            
+                const a = document.getElementById('return');
+
+                form.appendChild(hall);
+                form.appendChild(time);
+                form.appendChild(place);
+                form.appendChild(updateData);
+
+                form.setAttribute('method', 'post');
+                form.setAttribute('action', `/update-data/${id}?_method=PUT`);
+
+                document.body.insertBefore(form, a);
+            }
+        }
+    </script>
+</body>
+
+</html>

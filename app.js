@@ -13,6 +13,7 @@ const sendFeedbackMail = require('./controllers/sendFeedbackMail');
 const dotenv = require("dotenv");
 const Cab = require('./models/cabTimings');
 const Booking = require('./models/booking');
+const methodOverride = require('method-override');
 
 //connect to mongodb and start server
 dotenv.config(); 
@@ -79,7 +80,7 @@ app.use(express.json());
 app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(flash());
-
+app.use(methodOverride('_method'));
 
 
 //routes
@@ -156,6 +157,29 @@ app.post('/add-cab-data', async (req,res)=>{
     });
     await cab.save();
     res.redirect('/add-cab-data');
+});
+
+app.get('/update-cab-data', async (req,res) =>{
+    if(req.user){
+        if(req.user.isAdmin){
+            const cabs = await Cab.find();
+            res.render('updateCabData',{cabs:cabs});
+        } else {
+            res.redirect('/access-denied');
+        }
+    } else {
+    res.redirect('/user/log-in');
+    }
+});
+
+app.put('/update-data/:id',async (req,res) => {
+    console.log(req.body.hall, req.body.time, req.body.place);
+    await Cab.findByIdAndUpdate(req.params.id, {
+        hall: req.body.hall,
+        time: req.body.time,
+        place: req.body.place
+    });
+    res.redirect('/update-cab-data');
 });
 
 app.get('/access-denied', (req,res) =>{
